@@ -19,6 +19,15 @@ export class ScraperComponent {
 
   constructor(private http: HttpClient) {}
 
+  copyToClipboard() {
+    navigator.clipboard.writeText(JSON.stringify(this.result, null, 2));
+  }
+
+  clear() {
+    this.result = null;
+    this.error = '';
+  }
+
   onSubmit() {
     this.loading = true;
     this.error = '';
@@ -49,6 +58,9 @@ export class ScraperComponent {
         break;
       case 'threads':
         url += `threads?username=${this.username}`;
+        break;
+      case 'reddit':
+        url += `reddit?username=${this.username}`;
         break;
       default:
         this.error = 'Invalid platform selected';

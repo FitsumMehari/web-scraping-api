@@ -45,4 +45,9 @@ export class ScrapingController {
   async getThreadsData(@Query('username') username: string) {
     return this.scrapingService.scrapeThreadsProfile(username);
   }
+
+  @Get('reddit')
+  async getRedditData(@Query('username') username: string) {
+    return this.scrapingService.scrapeReddit(username);
+  }
 }

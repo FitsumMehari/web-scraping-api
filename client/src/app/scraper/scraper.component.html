@@ -1,28 +1,49 @@
 <div class="container">
-  <h1>Social Media Scraper</h1>
-  <form (ngSubmit)="onSubmit()">
-    <label for="platform">Platform:</label>
-    <select id="platform" [(ngModel)]="selectedPlatform" name="platform">
-      <option value="youtube">YouTube</option>
-      <option value="instagram">Instagram</option>
-      <option value="twitter">Twitter</option>
-      <option value="tiktok">TikTok</option>
-      <option value="facebook">Facebook</option>
-      <option value="facebook-group">Facebook Group</option>
-      <option value="linkedin">LinkedIn</option>
-      <option value="threads">Threads</option>
-    </select>
+  <div class="card">
+    <div class="card-header">
+      <h1>Social Media Scraper</h1>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="platform">Platform:</label>
+          <select id="platform" [(ngModel)]="selectedPlatform" name="platform">
+            <option value="youtube">YouTube</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter</option>
+            <option value="tiktok">TikTok</option>
+            <option value="facebook">Facebook</option>
+            <option value="facebook-group">Facebook Group</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="threads">Threads</option>
+            <option value="reddit">Reddit</option>
+          </select>
+        </div>
 
-    <label for="username">Username/Slug:</label>
-    <input type="text" id="username" [(ngModel)]="username" name="username" required>
+        <div class="form-group">
+          <label for="username">Username/Slug:</label>
+          <input type="text" id="username" [(ngModel)]="username" name="username" required>
+        </div>
 
-    <button type="submit" [disabled]="loading">Scrape</button>
-  </form>
+        <button type="submit" [disabled]="loading">
+          <span *ngIf="!loading">Get Data</span>
+          <span *ngIf="loading" class="spinner"></span>
+        </button>
+        <button type="button" (click)="clear()">Clear</button>
+      </form>
+    </div>
+  </div>
 
   <div *ngIf="loading" class="loading">Loading...</div>
 
-  <div *ngIf="result" class="result">
-    <pre>{{ result | json }}</pre>
+  <div *ngIf="result" class="card result">
+    <div class="card-header">
+      <h2>Result</h2>
+      <button (click)="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+    <div class="card-body">
+      <pre>{{ result | json }}</pre>
+    </div>
   </div>
 
   <div *ngIf="error" class="error">{{ error }}</div>

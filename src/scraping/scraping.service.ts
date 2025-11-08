@@ -7,6 +7,32 @@ import * as cheerio from 'cheerio';
 
 @Injectable()
 export class ScrapingService {
+
+  /** Scrapes Reddit profile data. */
+  async scrapeReddit(username: string): Promise<Record<string, string>> {
+    const url = `https://www.reddit.com/user/${username}/`;
+
+    try {
+      const { data } = await axios.get(url);
+      const $ = cheerio.load(data);
+
+      const karmaElement = $('span#profile--id-card--highlight-tooltip--karma');
+      const postKarmaElement = $('span._1hNyD6NRK_21M-03t6x-1I').eq(0);
+      const commentKarmaElement = $('span._1hNyD6NRK_21M-03t6x-1I').eq(1);
+
+      return {
+        karma: karmaElement.text().trim() || 'N/A',
+        postKarma: postKarmaElement.text().trim() || 'N/A',
+        commentKarma: commentKarmaElement.text().trim() || 'N/A',
+      };
+    } catch (error) {
+      console.error('Reddit Scraping Error:', error);
+      throw new InternalServerErrorException(
+        'Could not fetch or parse data from Reddit. The site may be temporarily unavailable or the profile does not exist.',
+      );
+    }
+  }
+
   /** Scrapes YouTube channel data. */
   async scrapeYoutube(username: string) {
     const browser = await puppeteer.launch({

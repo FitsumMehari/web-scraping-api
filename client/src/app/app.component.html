@@ -1,1 +1,12 @@
-<app-scraper></app-scraper>
+<div class="container">
+  <div class="header">
+    <h1>Social Media Scraper</h1>
+    <div class="dark-mode-toggle">
+      <label for="dark-mode-switch">Dark Mode</label>
+      <input type="checkbox" id="dark-mode-switch" (change)="toggleDarkMode()">
+    </div>
+  </div>
+    <router-outlet></router-outlet>
+      <div class="footer">
+        <p>Made with ❤️ by Gemini | <a href="https://github.com/google/gemini-cli" target="_blank">Source Code</a></p>
+      </div>  </div>

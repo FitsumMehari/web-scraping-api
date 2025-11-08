@@ -8,10 +8,9 @@ describe('ScraperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ScraperComponent]
-    })
-    .compileComponents();
-    
+      imports: [ScraperComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ScraperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

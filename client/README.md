@@ -1,6 +1,6 @@
-# Client
+# Social Media Scraper - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+This is the frontend for the Social Media Scraper application. It is built with Angular and provides a user interface for interacting with the backend API.
 
 ## Development server
 
